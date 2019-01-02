@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" href="test1.css">
+    <script src="../jquery-3.3.1.min.js"></script>
+    <script src="../webuploader.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--弹出遮罩层-->
+<div class="zpzs_gray"></div>
+<!--上传框开始-->
+<div id="uploader">
+    <!--上传框头部-->
+    <div class="add_img_head">
+        <span></span>
+        <b class="closeBtn"></b>
+    </div>
+    <!--缩略图容器-->
+    <div id="fileList"></div>
+    <!--选择图片按钮-->
+    <div class="add_img">
+        <div id="filePicker"></div>
+        <p>按住Ctrl可多选照片</p>
+
+        <p>单次上传最多12张(单张最大2M)</p>
+
+        <div class="uploadBtn">开始上传</div>
+    </div>
+</div>
+<!--上传框结束-->
+<script src="./upload.js"></script>
+</body>
+</html>

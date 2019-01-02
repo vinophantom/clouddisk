@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.phantom.entity.SysUser" table="sys_user" schema="clouddisk">
+        <id name="id" column="id"/>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
+        <property name="salt" column="salt"/>
+        <property name="email" column="email"/>
+        <property name="mobile" column="mobile"/>
+        <property name="memorySize" column="memory_size"/>
+        <property name="usedSize" column="used_size"/>
+        <property name="valid" column="valid"/>
+        <property name="createdTime" column="createdTime"/>
+        <property name="modifiedTime" column="modifiedTime"/>
+        <property name="createdUser" column="createdUser"/>
+        <property name="modifiedUser" column="modifiedUser"/>
+    </class>
+</hibernate-mapping>

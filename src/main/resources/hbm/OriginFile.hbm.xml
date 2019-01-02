@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "../dtd/hibernate-mapping-3.0.dtd">
+    <!--"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">-->
+<hibernate-mapping>
+
+    <class name="com.phantom.entity.OriginFile" table="origin_file" schema="clouddisk">
+        <id name="originFileId" column="origin_file_id" >
+            <generator class="increment" />
+        </id>
+        <property name="fileMd5" column="file_md5"/>
+        <property name="fileSize" column="file_size"/>
+        <property name="fileType" column="file_type"/>
+        <property name="fileUrl" column="file_url"/>
+        <property name="storageMode" column="storage_mode"/>
+        <property name="hdfsPath" column="hdfs_path"/>
+        <property name="hbaseRowkey" column="hbase_rowkey"/>
+        <property name="status" column="status"/>
+        <property name="fileCount" column="file_count"/>
+        <property name="fileStatus" column="file_status"/>
+        <property name="createTime" column="create_time"/>
+        <property name="modifyTime" column="modify_time"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8080/clouddisk/webuploader/webuploader.css">
+	<script type="text/javascript" src="http://127.0.0.1:8080/clouddisk/webuploader/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="http://127.0.0.1:8080/clouddisk/webuploader/webuploader.js"></script>
+
+	<title></title>
+</head>
+<body>
+	<div id="uploader"> 
+	    <!--用来存放文件信息--> 
+	    <div id="thelist"></div> 
+	    <div> 
+	      <div id="attach"></div> 
+	      <!-- <input type="button" value="上传" id="upload"/> --> 
+	    </div> 
+	</div>
+
+
+	
+	<!-- <div id="uploader1" class="wu-example"> -->
+    <!--用来存放文件信息-->
+	   <!-- <div id="thelist1" class="uploader-list"></div>
+	    <div class="btns">
+	        <div id="multi"></div>
+	        <input type="button" value="上传" id="multiUpload"/> 
+	    </div>
+	</div> -->
+</body>
+<script type="text/javascript">
+	/*********************************WebUpload 单文件上传 begin*****************************************/
+/*********************************WebUpload 单文件上传 begin*****************************************/
+var uploader ;// 实例化
+$(function(){
+  var $list = $("#thelist");
+  uploader = WebUploader.create({
+      auto:true, //是否自动上传 
+      pick: { 
+        id: '#attach',
+        name:"multiFile", //这个地方 name 没什么用，和fileVal 配合使用。
+        label: 'click 选择文件 and auto upload',
+        multiple:false //默认为true，true表示可以多选文件，HTML5的属性
+      },
+      formData: {
+          lsh: guid+''
+      },
+      swf: './Uploader.swf', //在这里必需要引入swf文件，webuploader初始化要用
+      fileVal:'multiFile', //提交到到后台，是要用"multiFile"这个名称属性来取文件的 
+      server: "http://127.0.0.1:8080/clouddisk/file/webUploader", 
+      duplicate:true,//是否可重复选择同一文件 
+      resize: false, 
+      chunked: true, //分片处理 
+      chunkSize: 20 * 1024 * 1024, //每片20M 
+      chunkRetry:2,//如果失败，则不重试 
+      threads:1,//上传并发数。允许同时最大上传进程数。 
+      fileNumLimit:1,//上传的文件总数 
+      // 禁掉全局的拖拽功能。 
+      disableGlobalDnd: true
+    });  
+    // 当有文件添加进来的时候 
+    uploader.on( "fileQueued", function( file ) { 
+      console.log("fileQueued:");
+      var lsh = guid();
+      $list.append( "<div id='"+ file.id + "' class='item'>" + 
+        "<h4 class='info'>" + file.name + "</h4>" +
+        "<input type='hidden' class='lsh' value='" + lsh + "'>" +
+        "<p class='state'>uploading...</p>" +
+      "</div>" ); 
+    }); 
+    //当所有文件上传结束时触发 
+    uploader.on("uploadFinished",function(){ 
+      console.log("uploadFinished:"); 
+    })
+    //当文件上传前触发
+    uploader.on("uploadStart", function(file) {
+        //uploader.options.formData['lsh'] = guid() + '';
+    });
+    //当文件上传成功时触发。 
+    uploader.on( "uploadSuccess", function( file ,response) { 
+//     alert(file.name); 
+      $( "#"+file.id ).find("p.state").text("uploaded！");
+    }); 
+    uploader.on( "uploadError", function( file ) { 
+      $( "#"+file.id ).find("p.state").text("upload failed！");
+      uploader.cancelFile(file); 
+      uploader.removeFile(file,true); 
+      uploader.reset(); 
+    }); 
+    //如果是手动上传,用下面的事件,并启用jsp页面上的上传按钮 
+//    $("#upload").on("click", function() { 
+//      uploader.upload(); 
+//    }) 
+}); 
+/*********************************WebUpload 单文件上传 end*******************************************/
+//用于生成uuid
+function S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+}
+function guid() {
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+</script>
+</html>
